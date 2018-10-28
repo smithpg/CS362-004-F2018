@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "dominion_helpers.h": "c"
+    }
+}
