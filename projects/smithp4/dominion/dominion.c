@@ -1,6 +1,5 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
-#include "cards.h"
 #include "rngs.h"
 #include <stdio.h>
 #include <math.h>
@@ -749,13 +748,19 @@ int adventurerEffect(struct gameState *state, int currentPlayer)
   int cardDrawn;
   int z = 0; // this is the counter for the temp hand
 
+  int counter = state->deckCount[currentPlayer];
   while (drawntreasure < 2)
   {
 
     drawCard(currentPlayer, state);
+    counter--;
     cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1]; //top card of hand is most recently drawn card.
     if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
+    {
+      // printf("\neffectfn:: treasure @ %i", counter);
+
       drawntreasure++;
+    }
     else
     {
       temphand[z] = cardDrawn;
