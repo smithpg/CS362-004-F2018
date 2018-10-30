@@ -91,13 +91,11 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c \
 	gcc -o cardtest2 dominion.o rngs.o cardtest2.c $(CFLAGS)
 	./cardtest2 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
-	
+
 	echo "cardtest3.c:" >> unittestresults.out
 	gcc -o cardtest3 dominion.o rngs.o cardtest3.c $(CFLAGS)
 	./cardtest3 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
-	
-	
 	
 
 player: player.c interface.o
