@@ -56,6 +56,18 @@ cardtest2: cardtest2.c dominion.o rngs.o
 cardtest3: cardtest3.c dominion.o rngs.o
 	gcc  -o cardtest3 -g  cardtest3.c dominion.o rngs.o $(CFLAGS)
 	./cardtest3
+
+randomtestcard1: randomtestcard1.c dominion.o rngs.o
+	gcc  -o randomtestcard1 -g  randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1
+ 
+randomtestcard2: randomtestcard2.c dominion.o rngs.o
+	gcc  -o randomtestcard2 -g  randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2
+ 
+randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+	gcc  -o randomtestadventurer -g  randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	./randomtestadventurer
  
 
 unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c \
@@ -96,6 +108,23 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c \
 	gcc -o cardtest3 dominion.o rngs.o cardtest3.c $(CFLAGS)
 	./cardtest3 >> unittestresults.out
 	gcov dominion.c >> unittestresults.out
+
+randomtestresults: randomtestcard1.c randomtestcard2.c randomtestadventurer.c dominion.o rngs.o
+	
+	echo "randomtestcard1.c:" >> randomtestcard1.out
+	gcc -o randomtestcard1 dominion.o rngs.o randomtestcard1.c $(CFLAGS)
+	./randomtestcard1 >> randomtestcard1.out
+	gcov dominion.c >> randomtestcard1.out
+	
+	echo "randomtestcard2.c:" >> randomtestcard2.out
+	gcc -o randomtestcard2 dominion.o rngs.o randomtestcard2.c $(CFLAGS)
+	./randomtestcard2 >> randomtestcard2.out
+	gcov dominion.c >> randomtestcard2.out
+
+	echo "randomtestadventurer.c:" >> randomtestadventurer.out
+	gcc -o randomtestadventurer dominion.o rngs.o randomtestadventurer.c $(CFLAGS)
+	./randomtestadventurer >> randomtestadventurer.out
+	gcov dominion.c >> randomtestadventurer.out
 	
 
 player: player.c interface.o
