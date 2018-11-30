@@ -41,9 +41,9 @@ public class UrlValidatorTest extends TestCase {
 	   UrlValidator testValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
 	  
 	   // Test arbitrary valid URLs
-	   myAssertTrue(testValidator.isValid("ftp://www.youtube.com/watch?v=J8sWPjYe1tw"));
-	   myAssertTrue(testValidator.isValid("http://google.com"));
-	   myAssertTrue(testValidator.isValid("reddit.com"));
+	   assertTrue(testValidator.isValid("ftp://www.youtube.com/watch?v=J8sWPjYe1tw"));
+	   assertTrue(testValidator.isValid("http://google.com"));
+	   assertTrue(testValidator.isValid("reddit.com"));
 	   
 	   // Test arbitrary invalid URLs
 	   assertFalse(testValidator.isValid("%^0://google.123"));
@@ -124,7 +124,9 @@ public class UrlValidatorTest extends TestCase {
    
    public void testIsValid()
    {
-	   
+	   System.out.println("start");
+	   UrlValidator testValidator = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+	   boolean res = false;
 	   boolean expected = true;
 	   do {
 		   StringBuilder urlBuffer = new StringBuilder();
@@ -132,41 +134,54 @@ public class UrlValidatorTest extends TestCase {
 		   // Build a URL to test
 		   for (int i = 0; i < testParts.length; i++) {
 			   
-			   testParts
-			   urlBuffer.append(testParts[i].parts[testPartsIndex[i]])
+			   expected &= testParts[i].partIsValid(TestPartsIndices[i]);
+			   urlBuffer.append(testParts[i].parts[TestPartsIndices[i]]);
 		   }
 		   
 		   // Pass the URL to isValid, and check output against expected result
 		   
 		   String url = urlBuffer.toString();
-		   System.out.println(url);   
-	   } while ();
+//		   System.out.println(url); 
+		   
+		   System.out.println();
+		   try {
+			   res = testValidator.isValid(url);
+			   assertEquals(expected, res);
+		   }
+		   catch(Error e)
+		   {
+			   System.out.println(url + " caused " +e);
+		   } 
+	       System.out.println(url + " returned " + res); 
+	       System.out.println();
+		   
+		   
+	   } while (incrementTestPartsIndices(TestPartsIndices, testParts));
 	   
 	   
 	   
 	   
    }
-   
-   
-   static boolean incrementTestPartsIndex(int[] testPartsIndex, Object[] testParts) {
-	      /*  */
+    
+   static boolean incrementTestPartsIndices(int[] TestPartsIndices, TestPartGroup[] testParts) {
+	      /* Based on function of the same name from UrlValidatorCorrect/test  */
 	   
 	   	  boolean carry = true;  //add 1 to lowest order part.
 	      boolean maxIndex = true;
-	      for (int testPartsIndexIndex = 0; testPartsIndexIndex >= 0; --testPartsIndexIndex) {
-	         int index = testPartsIndex[testPartsIndexIndex];
-	         ResultPair[] part = (ResultPair[]) testParts[testPartsIndexIndex];
+	      for (int TestPartsIndicesIndex = 0; TestPartsIndicesIndex < TestPartsIndices.length; ++TestPartsIndicesIndex) {
+	         int partsArrayIndex = TestPartsIndices[TestPartsIndicesIndex];
+	         String[] partsArray = testParts[TestPartsIndicesIndex].parts;
 	         if (carry) {
-	            if (index < part.length - 1) {
-	               index++;
-	               testPartsIndex[testPartsIndexIndex] = index;
+	            if (partsArrayIndex < partsArray.length - 1) {
+	            	partsArrayIndex++;
+	               TestPartsIndices[TestPartsIndicesIndex] = partsArrayIndex;
 	               carry = false;
 	            } else {
-	               testPartsIndex[testPartsIndexIndex] = 0;
+	               TestPartsIndices[TestPartsIndicesIndex] = 0;
 	               carry = true;
 	            }
 	         }
-	         maxIndex &= (index == (part.length - 1));
+	         maxIndex &= (partsArrayIndex == (partsArray.length - 1));
 	      }
 
 
@@ -190,7 +205,7 @@ public class UrlValidatorTest extends TestCase {
    TestPartGroup testQueries = new TestPartGroup(validQueries, invalidQueries);
    
    TestPartGroup[] testParts = {testSchemes, testAuthorities, testPaths, testQueries};
-   int[] testPartsIndex = {0, 0, 0, 0};
+   int[] TestPartsIndices = {0, 0, 0, 0};
 }
 
 
