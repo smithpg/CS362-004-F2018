@@ -1,0 +1,95 @@
+Result for running unit tests:
+unittest1.c:
+TESTING buyCards():
+
+Test #1: Attempt buy during action phase
+	FAILED
+Test #2: Attempt to buy more cards than should be allowed
+	PASSED
+Test #3 : Attempt to buy a card that is out of stock
+	PASSED
+Test #4 : Attempt to buy a card that player cannot afford
+	PASSED
+Test #5 : Check that selected card is added to top of discard on succesful purchase
+	PASSED
+File 'dominion.c'
+Lines executed:20.10% of 572
+Creating 'dominion.c.gcov'
+
+File 'c:/mingw/include/stdio.h'
+Lines executed:0.00% of 5
+Creating 'stdio.h.gcov'
+
+unittest2.c:
+TESTING gainCard():
+
+Test #1: Attempt gain unavailable card from supply
+	PASSED
+Test #2: Attempt to gain card to discard.
+	PASSED
+Test #3: Attempt to gain card to deck.
+	PASSED
+Test #4: Attempt to gain card to hand.
+	PASSED
+Test #5: Check that supply pile is decremented after successful gain
+	PASSED
+File 'dominion.c'
+Lines executed:20.98% of 572
+Creating 'dominion.c.gcov'
+
+File 'c:/mingw/include/stdio.h'
+Lines executed:0.00% of 5
+Creating 'stdio.h.gcov'
+
+unittest3.c:
+TESTING drawCard():
+
+Test #1: Draw card from non-empty deck
+	PASSED
+
+Test #2: Draw card with empty deck
+	PASSED
+File 'dominion.c'
+Lines executed:23.43% of 572
+Creating 'dominion.c.gcov'
+
+File 'c:/mingw/include/stdio.h'
+Lines executed:0.00% of 5
+Creating 'stdio.h.gcov'
+
+unittest4.c:
+TESTING discardCard():
+
+Test #1: Attempt to trash a card from player's hand
+	PASSED
+
+Test #2: Attempt to discard (not trash) a card from player's hand
+	FAILED
+File 'dominion.c'
+Lines executed:25.35% of 572
+Creating 'dominion.c.gcov'
+
+File 'c:/mingw/include/stdio.h'
+Lines executed:0.00% of 5
+Creating 'stdio.h.gcov'
+
+cardtest1.c:
+----------------- Testing Card: smithy ----------------
+TEST 1: 
+hand count = 8, expected = 7
+deck count = 1, expected = 2
+discard count = 0, expected = 1
+	FAILED
+	FAILED
+
+ >>>>> SUCCESS: Testing complete smithy <<<<<
+
+File 'dominion.c'
+Lines executed:28.15% of 572
+Creating 'dominion.c.gcov'
+
+File 'c:/mingw/include/stdio.h'
+Lines executed:0.00% of 5
+Creating 'stdio.h.gcov'
+
+cardtest2.c:
